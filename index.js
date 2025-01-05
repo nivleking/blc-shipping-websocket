@@ -7,8 +7,24 @@ const cors = require("cors");
 app.use(cors());
 const server = http.createServer(app);
 
+app.get("/", (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>My WebSocket App</title>
+    </head>
+    <body>
+      <h1>Welcome to My WebSocket App</h1>
+    </body>
+    </html>
+  `);
+});
+
 // TODO: change these two values
-const origin = "#";
+const origin = "http://localhost:5173";
 const port = "5174";
 
 const io = new Server(server, {
@@ -23,8 +39,8 @@ io.on("connection", (socket) => {
     io.emit("user_added", newUser);
   });
 
-  socket.on("user_deleted", (userId) => {
-    io.emit("user_deleted", userId);
+  socket.on("user_kicked", (userId) => {
+    io.emit("user_kicked", userId);
   });
 
   socket.on("disconnect", () => {});
