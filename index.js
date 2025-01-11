@@ -43,6 +43,18 @@ io.on("connection", (socket) => {
     io.emit("user_kicked", userId);
   });
 
+  socket.on("start_simulation", (roomId) => {
+    io.emit("start_simulation", roomId);
+  });
+
+  socket.on("end_simulation", (roomId) => {
+    io.emit("end_simulation", roomId);
+  });
+
+  socket.on("swap_bays", (roomId) => {
+    io.emit("swap_bays", roomId);
+  });
+
   socket.on("disconnect", () => {});
 });
 
