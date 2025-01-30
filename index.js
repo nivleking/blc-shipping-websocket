@@ -55,6 +55,14 @@ io.on("connection", (socket) => {
     io.emit("swap_bays", roomId);
   });
 
+  socket.on("port_assigned", ({ roomId, userId, port }) => {
+    io.emit("port_updated", { roomId, userId, port });
+  });
+
+  socket.on("rankings_updated", ({ roomId: updatedRoomId, rankings: updatedRankings }) => {
+    io.emit("rankings_updated", { roomId: updatedRoomId, rankings: updatedRankings });
+  });
+
   socket.on("disconnect", () => {});
 });
 
