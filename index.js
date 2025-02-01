@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 // TODO: change these two values
-const origin = "https://slg.petra.ac.id";
+const origin = "http://localhost:5173";
 const port = "5174";
 
 const io = new Server(server, {
