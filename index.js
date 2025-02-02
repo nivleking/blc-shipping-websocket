@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 
 // TODO: change these two values
 const origin = "http://localhost:5173";
-const port = "5174";
+const port = "6001";
 
 const io = new Server(server, {
   cors: {
