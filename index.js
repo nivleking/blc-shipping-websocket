@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 // TODO: change these two values
-const origin = "http://localhost:5173";
+const origin = "http://147.93.108.193:5173";
 const port = "6001";
 
 const io = new Server(server, {
