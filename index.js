@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 // TODO: change these two values
-const origin = "http://147.93.108.193:5173";
+const origin = "http://localhost:5173";
 const port = "6001";
 
 const io = new Server(server, {
@@ -61,6 +61,14 @@ io.on("connection", (socket) => {
 
   socket.on("rankings_updated", ({ roomId: updatedRoomId, rankings: updatedRankings }) => {
     io.emit("rankings_updated", { roomId: updatedRoomId, rankings: updatedRankings });
+  });
+
+  socket.on("stats_requested", ({ roomId, userId }) => {
+    io.emit("stats_requested", { roomId, userId });
+  });
+
+  socket.on("stats_updated", ({ roomId, userId, stats }) => {
+    io.emit("stats_updated", { roomId, userId, stats });
   });
 
   socket.on("disconnect", () => {});
