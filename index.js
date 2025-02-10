@@ -3,6 +3,7 @@ const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
+require('dotenv').config();
 
 app.use(cors());
 const server = http.createServer(app);
@@ -24,8 +25,8 @@ app.get("/", (req, res) => {
 });
 
 // TODO: change these two values
-const origin = "http://localhost:5173";
-const port = "6001";
+const origin = process.env.WEBSOCKET_ORIGIN;
+const port = process.env.WEBSOCKET_PORT;
 
 const io = new Server(server, {
   cors: {
