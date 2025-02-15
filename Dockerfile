@@ -1,6 +1,6 @@
 FROM node:20.11-alpine3.19
 
-WORKDIR /app
+WORKDIR /app/websockets
 
 # Copy package files
 COPY package*.json ./
