@@ -3,7 +3,7 @@ const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
-require('dotenv').config();
+require("dotenv").config();
 
 app.use(cors());
 const server = http.createServer(app);
@@ -36,32 +36,32 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  socket.on("user_added", (newUser) => {
-    io.emit("user_added", newUser);
+  socket.on("user_added", ({ roomId, newUser }) => {
+    io.emit("user_added", { roomId, newUser });
   });
 
-  socket.on("user_kicked", (userId) => {
-    io.emit("user_kicked", userId);
+  socket.on("user_kicked", ({ roomId, userId }) => {
+    io.emit("user_kicked", { roomId, userId });
   });
 
-  socket.on("start_simulation", (roomId) => {
-    io.emit("start_simulation", roomId);
+  socket.on("start_simulation", ({ roomId }) => {
+    io.emit("start_simulation", { roomId });
   });
 
-  socket.on("end_simulation", (roomId) => {
-    io.emit("end_simulation", roomId);
+  socket.on("end_simulation", ({ roomId }) => {
+    io.emit("end_simulation", { roomId });
   });
 
-  socket.on("swap_bays", (roomId) => {
-    io.emit("swap_bays", roomId);
+  socket.on("swap_bays", ({ roomId }) => {
+    io.emit("swap_bays", { roomId });
   });
 
   socket.on("port_assigned", ({ roomId, userId, port }) => {
     io.emit("port_updated", { roomId, userId, port });
   });
 
-  socket.on("rankings_updated", ({ roomId: updatedRoomId, rankings: updatedRankings }) => {
-    io.emit("rankings_updated", { roomId: updatedRoomId, rankings: updatedRankings });
+  socket.on("rankings_updated", ({ roomId, rankings }) => {
+    io.emit("rankings_updated", { roomId, rankings });
   });
 
   socket.on("stats_requested", ({ roomId, userId }) => {
@@ -72,7 +72,9 @@ io.on("connection", (socket) => {
     io.emit("stats_updated", { roomId, userId, stats });
   });
 
-  socket.on("disconnect", () => {});
+  socket.on("disconnect", () => {
+    console.log("User disconnected");
+  });
 });
 
 server.listen(port, () => {
