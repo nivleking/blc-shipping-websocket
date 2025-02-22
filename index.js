@@ -72,9 +72,7 @@ io.on("connection", (socket) => {
     io.emit("stats_updated", { roomId, userId, stats });
   });
 
-  socket.on("disconnect", () => {
-    console.log("User disconnected");
-  });
+  socket.on("disconnect", () => {});
 });
 
 server.listen(port, () => {
