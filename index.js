@@ -60,6 +60,10 @@ io.on("connection", (socket) => {
     io.emit("port_updated", { roomId, userId, port });
   });
 
+  socket.on("port_config_updated", ({ roomId }) => {
+    io.emit("port_config_updated", { roomId });
+  });
+
   socket.on("rankings_updated", ({ roomId, rankings }) => {
     io.emit("rankings_updated", { roomId, rankings });
   });
